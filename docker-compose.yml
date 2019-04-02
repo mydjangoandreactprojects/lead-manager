@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  leadmanager:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./leadmanager:/leadmanager
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    
+    environment:
+      - DB_HOST=db
+      - DB_NAME=leadmanager
+      - DB_USER=posgres
+      - DB_PASS=supersecretpassword
+    depends_on:
+      - db
+    
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=leadmanager
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword
