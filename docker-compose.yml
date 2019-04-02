@@ -15,7 +15,7 @@ services:
     environment:
       - DB_HOST=db
       - DB_NAME=leadmanager
-      - DB_USER=posgres
+      - DB_USER=postgres
       - DB_PASS=supersecretpassword
     depends_on:
       - db
